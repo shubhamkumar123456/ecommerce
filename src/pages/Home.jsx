@@ -4,7 +4,7 @@ import CartContext from '../context/CartContext';
 const Home = () => {
 
     let ctx = useContext(CartContext);
-    console.log(ctx)
+    console.log(ctx);
 
     const [Allproducts, setAllproducts] = useState([]);
     const getData=async()=>{
