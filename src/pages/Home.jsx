@@ -17,7 +17,8 @@ const Home = () => {
 
 
     const [currenPage, setcurrenPage] = useState(1);
-    const itemPerPage = 10;
+    console.log(currenPage)
+    const itemPerPage = 8;
     const lastIndex = itemPerPage * currenPage;
     const firstIndex = lastIndex - itemPerPage;
     let noOfBtn = Math.ceil(Allproducts.length / itemPerPage);
@@ -34,18 +35,29 @@ const Home = () => {
 
     // console.log(btnArr)
 
+    const handleNext = ()=>{
+        if(currenPage < noOfBtn){
+            setcurrenPage(currenPage+1)
+      
+    }
+}
 
+const handlePrev = ()=>{
+    if(currenPage > 1){
+        setcurrenPage(currenPage - 1)
+    }
+}
 
     useEffect(()=>{
         getData()
     },[])
   return (
 
-    <div>
- <div className='p-6 bg-amber-950 grid gap-8 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 '>
+    <div className='bg-amber-950 pb-4'>
+ <div className='p-6  grid gap-8 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 '>
     {
         slicedArr.map((ele,i)=>{
-            return <div className='flex bg-white gap-2 rounded-md p-3 flex-col justify-between items-center'>
+            return <div key={ele.id} className='flex bg-white gap-2 rounded-md p-3 flex-col justify-between items-center'>
                 <img src={ele.thumbnail} alt="" />
                 <p>{ele.title}</p>
                 <button onClick={()=>ctx.AddtoCart(ele)} className='bg-green-500 px-3 py-2 rounded-md text-white'>Add to Cart</button>
@@ -54,16 +66,18 @@ const Home = () => {
     }  
     </div>
 
-<div className='flex justify-center'>
+<div className='flex justify-center mt-4'>
 
 {/*  ['', '', '', '', '', '','', '', '',''] */}
-<button className='bg-black text-white rounded-md p-1  mx-1'>Prev</button>
+<button onClick={()=>setcurrenPage(1)} className='bg-black text-white rounded-md p-1  mx-1'>&larr;</button>
+<button onClick={handlePrev} className='bg-black text-white rounded-md p-1  mx-1'>Prev</button>
 {
     Array(noOfBtn).fill('').map((ele,i)=>{
-        return <button onClick={()=>setcurrenPage(i+1)} className='bg-blue-500 rounded-md p-1 w-10'>{i+1}</button>
+        return <button key={i+1} onClick={()=>setcurrenPage(i+1)} className={`${currenPage===i+1?'bg-green-400':'bg-white'} text-black rounded-md p-1 w-10`}>{i+1}</button>
     })
 }
-<button className='bg-black text-white rounded-md p-1 mx-1 '>Next</button>
+<button onClick={handleNext} className='bg-black text-white rounded-md p-1 mx-1 '>Next</button>
+<button onClick={()=>setcurrenPage(noOfBtn)} className='bg-black text-white rounded-md p-1 mx-1 '>&rarr;</button>
 </div>
     </div>
    
