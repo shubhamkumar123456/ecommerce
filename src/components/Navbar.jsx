@@ -25,7 +25,7 @@ const Navbar = (props) => {
         <h3 className='font-semibold text-2xl'>Ecom-Shop</h3>
             <li className='text-lg border-b'><Link to={'/'}>Home</Link></li>
             <li className='text-lg border-b'><Link>About</Link></li>
-            <li className='text-lg '><Link to={'/cart'} className='flex items-center gap-1'><BsCart3 size={25}/> <sup>{props.cartItem.length}</sup></Link></li>
+            <li className='text-lg '><Link to={'/cart'} className='flex items-center gap-1'><BsCart3 size={25}/> <sup>{ctx.cartArr.length}</sup></Link></li>
             <li className='text-sm hover:bg-blue-500 bg-blue-600 rounded-md px-4 py-2'><Link>Login</Link></li>
             <li className='text-sm hover:bg-amber-500 bg-amber-600 rounded-md px-4 py-2'><Link>Signup</Link></li>
         </ul>}
