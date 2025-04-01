@@ -11,7 +11,7 @@ const Login = () => {
   let emailRef = useRef();
   let passwordRef = useRef();
 
-  let navigate = useNavigate();
+
 
 
   let arr = JSON.parse(localStorage.getItem('Ecom'))  ||  []

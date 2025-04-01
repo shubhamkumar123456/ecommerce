@@ -3,8 +3,15 @@ import { Link } from 'react-router-dom'
 import { BsCart3 } from "react-icons/bs";
 import { RiMenu3Fill } from "react-icons/ri";
 import CartContext from '../context/CartContext';
+import UserContext from '../context/UserContext';
 
 const Navbar = (props) => {
+
+  let userStore = useContext(UserContext);
+  console.log(userStore)
+
+  let login = userStore.user.login
+
     const [showSidebar, setshowSidebar] = useState(false);
     let ctx = useContext(CartContext)
   return (
@@ -14,11 +21,11 @@ const Navbar = (props) => {
         <h3 className='font-semibold text-2xl'><Link className='' to={'/'}>Ecom-Shop</Link></h3>
 
         <ul className='hidden gap-8  items-center md:flex'>
-            <li className='text-md  li'><Link to={'/'}>Home</Link></li>
-            <li className='text-md  li'><Link>About</Link></li>
-            <li className='text-md '><Link to={'/cart'} className='flex items-center gap-1'><BsCart3 size={25}/> <sup>{ctx.cartArr.length}</sup></Link></li>
-            <li className='text-sm hover:bg-blue-500 bg-blue-600 rounded-md px-4 py-2'><Link>Login</Link></li>
-            <li className='text-sm hover:bg-amber-500 bg-amber-600 rounded-md px-4 py-2'><Link>Signup</Link></li>
+         { login===true &&  <li className='text-md  li'><Link to={'/'}>Home</Link></li>}
+           {login===true &&   <li className='text-md  li'><Link>About</Link></li>}
+           {login===true &&   <li className='text-md '><Link to={'/cart'} className='flex items-center gap-1'><BsCart3 size={25}/> <sup>{ctx.cartArr.length}</sup></Link></li>}
+          { login===false && <li className='text-sm hover:bg-blue-500 bg-blue-600 rounded-md px-4 py-2'><Link>Login</Link></li>}
+      { login===false && <li className='text-sm hover:bg-amber-500 bg-amber-600 rounded-md px-4 py-2'><Link>Signup</Link></li>}
         </ul>
 
    { showSidebar &&    <ul className='flex flex-col px-16 py-4 sidebar1 top-0 gap-8 bg-black h-screen fixed items-center md:hidden'>
@@ -26,8 +33,8 @@ const Navbar = (props) => {
             <li className='text-lg border-b'><Link to={'/'}>Home</Link></li>
             <li className='text-lg border-b'><Link>About</Link></li>
             <li className='text-lg '><Link to={'/cart'} className='flex items-center gap-1'><BsCart3 size={25}/> <sup>{ctx.cartArr.length}</sup></Link></li>
-            <li className='text-sm hover:bg-blue-500 bg-blue-600 rounded-md px-4 py-2'><Link>Login</Link></li>
-            <li className='text-sm hover:bg-amber-500 bg-amber-600 rounded-md px-4 py-2'><Link>Signup</Link></li>
+          {login===false  && <li className='text-sm hover:bg-blue-500 bg-blue-600 rounded-md px-4 py-2'><Link>Login</Link></li>}
+           {login===false && <li className='text-sm hover:bg-amber-500 bg-amber-600 rounded-md px-4 py-2'><Link>Signup</Link></li>}
         </ul>}
 
         <div onClick={()=>setshowSidebar(!showSidebar)} className='md:hidden block'>
