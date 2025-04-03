@@ -1,11 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 import CartContext from '../context/CartContext';
+import UserContext from '../context/UserContext';
 
 
 const Home = () => {
 
     let ctx = useContext(CartContext);
     console.log(ctx);
+
+    let userStore = useContext(UserContext);
+
+    let searchValue = userStore.searchValue;
+    console.log(searchValue)
 
     const [Allproducts, setAllproducts] = useState([]);
 
